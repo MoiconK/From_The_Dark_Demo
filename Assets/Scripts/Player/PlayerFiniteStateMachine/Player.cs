@@ -12,9 +12,8 @@ public class Player : MonoBehaviour
     public PlayerJumpState JumpState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
-    public GroundEntryState EntryState { get; private set; }
-    public GroundComboState ComboState { get; private set; }   
-    public GroundFinisherState FinisherState { get; private set; }
+    public PlayerAttackState PrimaryAttackState { get; private set; }
+    public PlayerAttackState SecondaryAttackState { get; private set; }
 
     #endregion
 
@@ -24,6 +23,7 @@ public class Player : MonoBehaviour
     public BoxCollider2D Collider { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
+    public PlayerInventory Inventory { get; private set; }
 
     [SerializeField]
     private PlayerData playerData;
@@ -51,9 +51,8 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
         InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
-        EntryState = new GroundEntryState(this, StateMachine, playerData, "attackL1");
-        ComboState = new GroundComboState(this, StateMachine, playerData, "attackL2");
-        FinisherState = new GroundFinisherState(this, StateMachine, playerData, "attackL3");
+        PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
+        SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
 
     }
 
@@ -63,13 +62,19 @@ public class Player : MonoBehaviour
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
         Collider = GetComponent<BoxCollider2D>();
+        Inventory = GetComponent<PlayerInventory>();
+
+        PrimaryAttackState.SetWeapon(Inventory.weapons[(int)CombatInputs.primary]);
+        //SecondaryAttackState.SetWeapon(Inventory.weapons[(int)CombatInputs.primary]);
+
         StateMachine.Initialize(IdleState);
         FacingDirection = 1;
     }
 
     private void Update()
     {
-        CurrentVelocity = RB.velocity;     
+        CurrentVelocity = RB.velocity;
+        
         StateMachine.CurrentState.LogicUpdate();
         
     }
