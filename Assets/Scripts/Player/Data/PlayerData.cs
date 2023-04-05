@@ -21,4 +21,7 @@ public class PlayerData : ScriptableObject
 
     public float groundCheckRadius = 0.3f;
     public LayerMask whatIsGround;
+
+    [Header("Attack Variables")]
+    public int damage;
 }

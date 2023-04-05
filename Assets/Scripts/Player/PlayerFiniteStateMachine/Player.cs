@@ -12,11 +12,16 @@ public class Player : MonoBehaviour
     public PlayerJumpState JumpState { get; private set; }
     public PlayerInAirState InAirState { get; private set; }
     public PlayerLandState LandState { get; private set; }
+    public GroundEntryState EntryState { get; private set; }
+    public GroundComboState ComboState { get; private set; }   
+    public GroundFinisherState FinisherState { get; private set; }
 
     #endregion
 
     #region Componentes
     public Animator Anim { get; private set; }
+
+    public BoxCollider2D Collider { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
 
@@ -46,6 +51,9 @@ public class Player : MonoBehaviour
         JumpState = new PlayerJumpState(this, StateMachine, playerData, "inAir");
         InAirState = new PlayerInAirState(this, StateMachine, playerData, "inAir");
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
+        EntryState = new GroundEntryState(this, StateMachine, playerData, "attackL1");
+        ComboState = new GroundComboState(this, StateMachine, playerData, "attackL2");
+        FinisherState = new GroundFinisherState(this, StateMachine, playerData, "attackL3");
 
     }
 
@@ -54,14 +62,14 @@ public class Player : MonoBehaviour
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
+        Collider = GetComponent<BoxCollider2D>();
         StateMachine.Initialize(IdleState);
-
         FacingDirection = 1;
     }
 
     private void Update()
     {
-        CurrentVelocity = RB.velocity;
+        CurrentVelocity = RB.velocity;     
         StateMachine.CurrentState.LogicUpdate();
         
     }
@@ -113,5 +121,5 @@ public class Player : MonoBehaviour
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
     #endregion
-
+    
 }
