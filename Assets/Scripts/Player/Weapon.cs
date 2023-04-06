@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [SerializeField] private SO_WeaponData weaponData;
+
     protected Animator lightCombatAnimator;
     protected PlayerAttackState state;
+
+    protected int attackCounter;
 
     protected virtual void Start()
     {
@@ -16,13 +20,25 @@ public class Weapon : MonoBehaviour
     public virtual void EnterWeapon()
     {
         gameObject.SetActive(true);
+
+        if(attackCounter >= weaponData.movementSpeed.Length)
+        {
+            attackCounter = 0;
+        }
+
+
         lightCombatAnimator.SetBool("attack", true);
+        lightCombatAnimator.SetInteger("attackCounter", attackCounter);
     }
 
     public virtual void ExitWeapon()
     {
         lightCombatAnimator.SetBool("attack", false);
+
+        attackCounter++;
+
         gameObject.SetActive(false);
+        
     }
 
     #region Animation Triggers
@@ -30,6 +46,26 @@ public class Weapon : MonoBehaviour
     public virtual void AnimationFinishTrigger()
     {
         state.AnimationFinishTrigger();
+    }
+
+    public virtual void AnimationStartMovementTrigger()
+    {
+        state.SetPlayerVelocity(weaponData.movementSpeed[attackCounter]);
+    }
+
+    public virtual void AnimationStopMovementTrigger()
+    {
+        state.SetPlayerVelocity(0);
+    }
+
+    public virtual void AnimationTurnOffFlipTrigger()
+    {
+        state.SetFlipCheck(false);
+    }
+
+    public virtual void AnimationTurnOnFlipTrigger()
+    {
+        state.SetFlipCheck(true);
     }
 
     #endregion
