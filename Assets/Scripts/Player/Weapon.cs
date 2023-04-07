@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    private List<IDamageable> detectedDamageables = new List<IDamageable>();
+
     [SerializeField] private SO_WeaponData weaponData;
 
     protected Animator lightCombatAnimator;
@@ -11,17 +13,26 @@ public class Weapon : MonoBehaviour
 
     protected int attackCounter;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         lightCombatAnimator = GetComponent<Animator>();
         gameObject.SetActive(false);
+    }
+    private void CheckMeleeAttack()
+    {
+        AttackDetails details= weaponData.AttackDetails[attackCounter];
+
+        foreach (IDamageable item in detectedDamageables)
+        {
+           item.Damage(details.damageAmount);
+        }
     }
 
     public virtual void EnterWeapon()
     {
         gameObject.SetActive(true);
 
-        if(attackCounter >= weaponData.movementSpeed.Length)
+        if(attackCounter >= weaponData.amountOfAttacks)
         {
             attackCounter = 0;
         }
@@ -39,6 +50,27 @@ public class Weapon : MonoBehaviour
 
         gameObject.SetActive(false);
         
+    }
+    public void AddToDetected(Collider2D collision)
+    {
+        
+        IDamageable damageable = collision.GetComponent<IDamageable>();
+        if(damageable != null)
+        {
+            
+            detectedDamageables.Add(damageable);
+        }
+    }
+
+    public void RemoveFromDetected(Collider2D collision)
+    {
+        Debug.Log("RemoveFromDetected");
+        IDamageable damageable = collision.GetComponent<IDamageable>();
+        if (damageable != null)
+        {
+            
+            detectedDamageables.Remove(damageable);
+        }
     }
 
     #region Animation Triggers
@@ -66,6 +98,11 @@ public class Weapon : MonoBehaviour
     public virtual void AnimationTurnOnFlipTrigger()
     {
         state.SetFlipCheck(true);
+    }
+
+    public virtual void AnimationActionTrigger()
+    {
+        CheckMeleeAttack();
     }
 
     #endregion

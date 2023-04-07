@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b07b9084b5041d54582963c76f04df05, type: 3}
   m_Name: LightAttack
   m_EditorClassIdentifier: 
-  movementSpeed:
-  - 3
-  - 4
-  - 2
+  attackDetails:
+  - attackName: LightAttack_1
+    movementSpeed: 3
+    damageAmount: 10
+  - attackName: LightAttack_2
+    movementSpeed: 3
+    damageAmount: 15
+  - attackName: LightAttack_3
+    movementSpeed: 2
+    damageAmount: 20
