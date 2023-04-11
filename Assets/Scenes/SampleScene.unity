@@ -1531,6 +1531,37 @@ CompositeCollider2D:
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
   m_CompositeGameObject: {fileID: 3452892}
+--- !u!1 &189343149
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 189343150}
+  m_Layer: 7
+  m_Name: playerCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &189343150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189343149}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.06, y: -0.51, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2075652489}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &221436713
 GameObject:
   m_ObjectHideFlags: 0
@@ -1848,7 +1879,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 302849103}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.6, y: -3.034, z: 0}
+  m_LocalPosition: {x: 45.07, y: -3.034, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2165,7 +2196,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 401057418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.6, y: -2.8339999, z: -10}
+  m_LocalPosition: {x: 45.07, y: -2.8339999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2342,7 +2373,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.6, y: -2.8339999, z: -10}
+  m_LocalPosition: {x: 45.07, y: -2.8339999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2833,8 +2864,12 @@ MonoBehaviour:
   entityData: {fileID: 11400000, guid: 6fc7b652e96844048a4d42968d5ad56e, type: 2}
   wallCheck: {fileID: 625571499}
   ledgeCheck: {fileID: 951836861}
+  playerCheck: {fileID: 189343150}
   idleStateData: {fileID: 11400000, guid: 2bf8256f3aa161d40bed6aed7add4d2c, type: 2}
   moveStateData: {fileID: 11400000, guid: 9d4234fe219a7bc4580ce93834adbcaf, type: 2}
+  playerDetectedStateData: {fileID: 11400000, guid: bda38f84d97ae6b41b2088313b0ce241, type: 2}
+  chargeStateData: {fileID: 11400000, guid: 61eebd86e4698d242a24721354388ea5, type: 2}
+  lookForPlayerStateData: {fileID: 11400000, guid: 4ece11f4b50bf794aa870e594b94cf97, type: 2}
 --- !u!1 &1689626893
 GameObject:
   m_ObjectHideFlags: 0
@@ -3142,6 +3177,7 @@ Transform:
   m_Children:
   - {fileID: 951836861}
   - {fileID: 625571499}
+  - {fileID: 189343150}
   m_Father: {fileID: 1655033128}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
