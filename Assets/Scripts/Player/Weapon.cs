@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Weapon : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class Weapon : MonoBehaviour
     {
         AttackDetails details= weaponData.AttackDetails[attackCounter];
 
-        foreach (IDamageable item in detectedDamageables)
+        foreach (IDamageable item in detectedDamageables.ToList())
         {
            item.Damage(details.damageAmount);
         }
