@@ -2865,11 +2865,13 @@ MonoBehaviour:
   wallCheck: {fileID: 625571499}
   ledgeCheck: {fileID: 951836861}
   playerCheck: {fileID: 189343150}
+  meleeAttackPosition: {fileID: 2048371990}
   idleStateData: {fileID: 11400000, guid: 2bf8256f3aa161d40bed6aed7add4d2c, type: 2}
   moveStateData: {fileID: 11400000, guid: 9d4234fe219a7bc4580ce93834adbcaf, type: 2}
   playerDetectedStateData: {fileID: 11400000, guid: bda38f84d97ae6b41b2088313b0ce241, type: 2}
   chargeStateData: {fileID: 11400000, guid: 61eebd86e4698d242a24721354388ea5, type: 2}
   lookForPlayerStateData: {fileID: 11400000, guid: 4ece11f4b50bf794aa870e594b94cf97, type: 2}
+  meleeAttackStateData: {fileID: 11400000, guid: e8f6cbfa22a65b34ab794bc868b8e120, type: 2}
 --- !u!1 &1689626893
 GameObject:
   m_ObjectHideFlags: 0
@@ -3143,6 +3145,37 @@ Transform:
   m_Father: {fileID: 1458536050}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2048371989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048371990}
+  m_Layer: 7
+  m_Name: MeleeAttackPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2048371990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048371989}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.03, y: -0.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2075652489}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2075652488
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,6 +3189,7 @@ GameObject:
   - component: {fileID: 2075652492}
   - component: {fileID: 2075652491}
   - component: {fileID: 2075652490}
+  - component: {fileID: 2075652494}
   m_Layer: 7
   m_Name: Alive
   m_TagString: Enemy
@@ -3178,6 +3212,7 @@ Transform:
   - {fileID: 951836861}
   - {fileID: 625571499}
   - {fileID: 189343150}
+  - {fileID: 2048371990}
   m_Father: {fileID: 1655033128}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3326,3 +3361,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2075652494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2075652488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04de7856915ff2e44a0c81fc1495bd75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
