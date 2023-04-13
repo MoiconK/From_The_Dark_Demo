@@ -6,11 +6,13 @@ using System.Linq;
 public class Weapon : MonoBehaviour
 {
     private List<IDamageable> detectedDamageables = new List<IDamageable>();
+    private List<IKnockbackable> detectedKnockbackables = new List<IKnockbackable>();
 
     [SerializeField] private SO_WeaponData weaponData;
 
     protected Animator lightCombatAnimator;
     protected PlayerAttackState state;
+    protected Core core;
 
     protected int attackCounter;
 
@@ -21,11 +23,17 @@ public class Weapon : MonoBehaviour
     }
     private void CheckMeleeAttack()
     {
-        AttackDetails details= weaponData.AttackDetails[attackCounter];
+        WeaponAttackDetails details= weaponData.AttackDetails[attackCounter];
 
         foreach (IDamageable item in detectedDamageables.ToList())
         {
            item.Damage(details.damageAmount);
+
+        }
+
+        foreach (IKnockbackable item in detectedKnockbackables.ToList())
+        {
+            item.Knockback(details.knockbackAngle, details.knockbackStrength, core.Movement.FacingDirection);
         }
     }
 
@@ -56,10 +64,18 @@ public class Weapon : MonoBehaviour
     {
         
         IDamageable damageable = collision.GetComponent<IDamageable>();
+
         if(damageable != null)
         {
             
             detectedDamageables.Add(damageable);
+        }
+
+        IKnockbackable knockbackable= collision.GetComponent<IKnockbackable>();
+
+        if(knockbackable != null)
+        {
+            detectedKnockbackables.Add(knockbackable);
         }
     }
 
@@ -71,6 +87,13 @@ public class Weapon : MonoBehaviour
         {
             
             detectedDamageables.Remove(damageable);
+        }
+
+        IKnockbackable knockbackable = collision.GetComponent<IKnockbackable>();
+
+        if (knockbackable != null)
+        {
+            detectedKnockbackables.Remove(knockbackable);
         }
     }
 
@@ -108,8 +131,9 @@ public class Weapon : MonoBehaviour
 
     #endregion
 
-    public void InitializeWeapon(PlayerAttackState state)
+    public void InitializeWeapon(PlayerAttackState state, Core core)
     {
         this.state= state;
+        this.core= core;
     }
 }

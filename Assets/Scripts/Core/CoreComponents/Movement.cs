@@ -5,14 +5,20 @@ using UnityEngine;
 public class Movement : CoreComponent
 {
     public Rigidbody2D RB { get; private set; }
+
     private Vector2 workspace;
     public int FacingDirection { get; private set; }
     public Vector2 CurrentVelocity { get; private set; }
+    public bool CanSetVelocity { get; set;}
 
     protected override void Awake()
     {
         base.Awake();
+
         FacingDirection = 1;
+
+        CanSetVelocity = true;
+
         RB = GetComponentInParent<Rigidbody2D>();
     }
     public void LogicUpdate()
@@ -24,23 +30,33 @@ public class Movement : CoreComponent
     public void SetVelocityX(float velocity)
     {
         workspace.Set(velocity, CurrentVelocity.y);
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
+        SetFinalVelocity();
+        
     }
 
     public void SetVelocityY(float velocity)
     {
         workspace.Set(CurrentVelocity.x, velocity);
-        RB.velocity = workspace;
-        CurrentVelocity = workspace;
+        SetFinalVelocity();
     }
 
     public virtual void SetVelocityKb(float velocity, Vector2 angle, int direction)
     {
         angle.Normalize();
         workspace.Set(angle.x * velocity * direction, velocity * angle.y);
-        RB.velocity = workspace;
+        SetFinalVelocity();
+        
     }
+
+    private void SetFinalVelocity()
+    {
+        if(CanSetVelocity) {
+            RB.velocity = workspace;
+            CurrentVelocity = workspace;
+        }
+        
+    }
+
     #endregion
     public void Flip()
     {

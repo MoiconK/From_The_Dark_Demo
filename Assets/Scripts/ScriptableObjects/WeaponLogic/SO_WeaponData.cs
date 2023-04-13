@@ -7,8 +7,10 @@ public class SO_WeaponData : ScriptableObject
 {
     public int amountOfAttacks {  get; protected set; }
     public float[] movementSpeed { get; protected set; }
-    [SerializeField] private AttackDetails[] attackDetails;
-    public AttackDetails[] AttackDetails { get => attackDetails; set => attackDetails = value; }
+
+    [SerializeField] private WeaponAttackDetails[] attackDetails;
+
+    public WeaponAttackDetails[] AttackDetails { get => attackDetails; private set => attackDetails = value; }
     private void OnEnable()
     {
         amountOfAttacks = attackDetails.Length;
