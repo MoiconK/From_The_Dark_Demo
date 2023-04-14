@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ChargeState : State
 {
+    protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
+    protected Movement movement;
+    private CollisionSenses CollisionSenses { get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>(); }
+    private CollisionSenses collisionSenses;
 
     protected D_ChargeState stateData;
 
@@ -22,8 +26,8 @@ public class ChargeState : State
     {
         base.DoChecks();
         isPlayerInMinAggroRange = entity.CheckPlayerInMinAggroRange();
-        isDetectingLedge = core.CollisionSenses.CheckLedge;
-        isDetectingWall = core.CollisionSenses.CheckWall;
+        isDetectingLedge = CollisionSenses.CheckLedge;
+        isDetectingWall = CollisionSenses.CheckWall;
         performCloseRangeAction = entity.CheckPlayerInCloseRangeAction();
     }
 
@@ -31,7 +35,7 @@ public class ChargeState : State
     {
         base.Enter();
         isChargeTimeOver = false;
-        core.Movement.SetVelocityX(stateData.chargeSpeed * core.Movement.FacingDirection);
+        Movement?.SetVelocityX(stateData.chargeSpeed * Movement.FacingDirection);
     }
 
     public override void Exit()
@@ -42,7 +46,7 @@ public class ChargeState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        core.Movement.SetVelocityX(stateData.chargeSpeed * core.Movement.FacingDirection);
+        Movement?.SetVelocityX(stateData.chargeSpeed * Movement.FacingDirection);
         if (Time.time >= startTime + stateData.chargeTime)
         {
             isChargeTimeOver = true;

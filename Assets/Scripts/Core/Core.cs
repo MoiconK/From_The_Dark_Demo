@@ -1,51 +1,42 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Core : MonoBehaviour
 {
-    public Movement Movement { 
-        get => GenericNotImplementedError<Movement>.TryGet(movement, transform.parent.name);
-        private set =>  movement = value;
-    }
-    public CollisionSenses CollisionSenses
-    {
-        get => GenericNotImplementedError<CollisionSenses>.TryGet(collisionSenses, transform.parent.name);
-        private set => collisionSenses = value;
-    }
-    public Combat Combat
-    {
-        get => GenericNotImplementedError<Combat>.TryGet(combat, transform.parent.name);
-        private set => combat = value;
-    }
-
-    public Stats Stats
-    {
-        get => GenericNotImplementedError<Stats>.TryGet(stats, transform.parent.name);
-        private set => stats = value;
-    }
-
-    private Movement movement;
-    private CollisionSenses collisionSenses;
-    private Combat combat;
-    private Stats stats;
-
-    private List<ILogicUpdate> components = new List<ILogicUpdate>();
-
-    private void Awake()
-    {
-        Movement= GetComponentInChildren<Movement>();
-        CollisionSenses = GetComponentInChildren<CollisionSenses>();
-        Combat = GetComponentInChildren<Combat>();
-        Stats = GetComponentInChildren<Stats>();
-        
-    }
+    public readonly List<CoreComponent> CoreComponents = new List<CoreComponent>();
 
     public void LogicUpdate()
     {
-        Movement.LogicUpdate();
-        Combat.LogicUpdate();
+        foreach (CoreComponent component in CoreComponents)
+        {
+            component.LogicUpdate();
+        }
     }
 
-    
+    public T GetCoreComponent<T>() where T : CoreComponent
+    {
+        var comp = CoreComponents
+            .OfType<T>()
+            .FirstOrDefault();
+
+        Debug.Log($"Type of comp found: {comp.GetType()}");
+
+        if (comp == null)
+        {
+            Debug.LogWarning($"{typeof(T)} not found on {transform.parent.name}");
+        }
+
+        return comp;
+    }
+
+    public void AddComponent(CoreComponent component)
+    {
+        if (!CoreComponents.Contains(component))
+        {
+            CoreComponents.Add(component);
+        }
+    }
 }

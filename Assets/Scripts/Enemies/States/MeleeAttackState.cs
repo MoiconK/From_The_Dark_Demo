@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class MeleeAttackState : AttackState
 {
+
     protected D_MeleeAttackState stateData;
     
-
     public MeleeAttackState(Entity entity, FiniteStateMachine stateMachine, string animBoolName, Transform attackPosition, D_MeleeAttackState stateData) : base(entity, stateMachine, animBoolName, attackPosition)
     {
         this.stateData = stateData;
@@ -64,7 +64,7 @@ public class MeleeAttackState : AttackState
 
             if(knockbackable != null)
             {
-                knockbackable.Knockback(stateData.knockbackAngle, stateData.knockbackStrenght, core.Movement.FacingDirection);
+                knockbackable.Knockback(stateData.knockbackAngle, stateData.knockbackStrenght, Movement.FacingDirection);
             }
         }
     }
