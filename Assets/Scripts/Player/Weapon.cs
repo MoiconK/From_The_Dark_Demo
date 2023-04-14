@@ -81,7 +81,7 @@ public class Weapon : MonoBehaviour
 
     public void RemoveFromDetected(Collider2D collision)
     {
-        Debug.Log("RemoveFromDetected");
+        
         IDamageable damageable = collision.GetComponent<IDamageable>();
         if (damageable != null)
         {

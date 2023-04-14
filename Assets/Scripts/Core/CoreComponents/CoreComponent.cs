@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CoreComponent : MonoBehaviour
 {
-    protected Core core;
+    protected Core core;   
 
     protected virtual void Awake()
     {
@@ -13,6 +13,9 @@ public class CoreComponent : MonoBehaviour
         if(core == null)
         {
             Debug.LogError("No hay un Core en el parent");
+            
         }
     }
+
+    
 }
