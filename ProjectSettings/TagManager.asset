@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - ParticleContainer
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Particles
   - Water
   - UI
   - Ground

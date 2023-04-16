@@ -22,14 +22,16 @@ public class Core : MonoBehaviour
             .OfType<T>()
             .FirstOrDefault();
 
-        Debug.Log($"Type of comp found: {comp.GetType()}");
+        if(comp) return comp;
 
-        if (comp == null)
-        {
-            Debug.LogWarning($"{typeof(T)} not found on {transform.parent.name}");
-        }
+        //Debug.Log($"Type of comp found: {comp.GetType()}");       
+            comp = GetComponentInChildren<T>();
 
-        return comp;
+        if (comp) return comp;
+            
+        Debug.LogWarning($"{typeof(T)} not found on {transform.parent.name}");      
+
+        return null;
     }
 
     public void AddComponent(CoreComponent component)
