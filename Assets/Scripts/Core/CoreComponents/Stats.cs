@@ -6,9 +6,11 @@ using UnityEngine;
 public class Stats : CoreComponent
 {
     public event Action OnHealthZero;
+    public event Action OnHealthChange;
+    
 
-    [SerializeField] private float maxHealth;
-    private float currentHealth;
+    [SerializeField] public float maxHealth;
+    public float currentHealth;
 
     protected override void Awake()
     {
@@ -20,7 +22,7 @@ public class Stats : CoreComponent
     public void DecreaseHealth(float amount)
     {
         currentHealth -= amount;
-
+        OnHealthChange?.Invoke();
         if(currentHealth <= 0)
         {
             currentHealth = 0;
@@ -32,5 +34,6 @@ public class Stats : CoreComponent
     public void IncreaseHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+        OnHealthChange?.Invoke();
     }
 }

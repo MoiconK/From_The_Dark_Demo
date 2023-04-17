@@ -16,7 +16,7 @@ MonoBehaviour:
   - attackName: LightAttack_1
     movementSpeed: 3
     damageAmount: 10
-    knockbackStrength: 10
+    knockbackStrength: 5
     knockbackAngle: {x: 1, y: 1}
   - attackName: LightAttack_2
     movementSpeed: 3
