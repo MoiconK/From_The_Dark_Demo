@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public PlayerLandState LandState { get; private set; }
     public PlayerAttackState PrimaryAttackState { get; private set; }
     public PlayerAttackState SecondaryAttackState { get; private set; }
+    public PlayerDodgeState DodgeState { get; private set; }
 
     #endregion
 
@@ -30,15 +31,6 @@ public class Player : MonoBehaviour
     private PlayerData playerData;
     #endregion
 
-    
-
-    #region Variables extras
-    //public Vector2 CurrentVelocity { get; private set; }
-   // public int FacingDirection { get; private set; }
-
-    private Vector2 workspace;
-    #endregion
-
     #region Unity Callback Functions
     private void Awake()
     {
@@ -51,6 +43,7 @@ public class Player : MonoBehaviour
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
         PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
         SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
+        DodgeState = new PlayerDodgeState(this, StateMachine, playerData, "dodge");
 
     }
 

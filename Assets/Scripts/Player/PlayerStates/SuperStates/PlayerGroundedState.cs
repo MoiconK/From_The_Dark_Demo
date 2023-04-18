@@ -12,6 +12,7 @@ public class PlayerGroundedState : PlayerState
     private CollisionSenses collisionSenses;
 
     private bool jumpInput;
+    protected bool dodgeInput;
     private bool isGrounded;
     
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
@@ -44,14 +45,19 @@ public class PlayerGroundedState : PlayerState
         base.LogicUpdate();
         XInput = player.InputHandler.NormInputX;
         jumpInput = player.InputHandler.JumpInput;
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary])
+        dodgeInput = player.InputHandler.DodgeInput;
+        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && isGrounded)
         {
             stateMachine.ChangeState(player.PrimaryAttackState);
-        } else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary])
+        } else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && isGrounded)
         {
             stateMachine.ChangeState(player.SecondaryAttackState);  
         }
-
+        else if (dodgeInput)
+        {
+            player.InputHandler.UseDodgeInput();
+            stateMachine.ChangeState(player.DodgeState);
+        }
         else if (jumpInput)
         {
             player.InputHandler.UseJumpInput();

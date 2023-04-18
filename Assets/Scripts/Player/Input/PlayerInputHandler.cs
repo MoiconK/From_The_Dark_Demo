@@ -12,6 +12,8 @@ public class PlayerInputHandler : MonoBehaviour
     public int NormInputY { get; private set; }
     public bool JumpInput { get; private set; }
     public bool JumpInputStop { get; private set; }
+    public bool DodgeInput { get; private set; }
+    public bool DodgeInputStop { get; private set; }
     public bool[] AttackInputs { get; private set; }
     
 
@@ -19,6 +21,7 @@ public class PlayerInputHandler : MonoBehaviour
     private float inputHoldTime = 0.2f;
 
     private float jumpImputStartTime;
+    private float dodgeInputStartTime;
     
     private void Start()
     {
@@ -89,8 +92,23 @@ public class PlayerInputHandler : MonoBehaviour
             JumpInput = false;
         }
     }
-    
+
+    public void OnDodgeInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            DodgeInput = true;
+        }
+
+
+    }
+
+    public void UseDodgeInput() => DodgeInput= false;
+
+
 }
+
+    
 
 public enum CombatInputs
 {

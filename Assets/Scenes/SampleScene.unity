@@ -2036,6 +2036,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6f1f547f-9e17-4ed9-a489-089792f2c0ce
     m_ActionName: Gameplay/SecondaryAttack[/Keyboard/x,/XInputControllerWindows/buttonNorth,/Keyboard/p,/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 302849108}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnDodgeInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c593a03d-4b15-47a3-b3e8-72f28dc9fcdd
+    m_ActionName: Gameplay/Dodge[/Keyboard/shift,/XInputControllerWindows/buttonEast]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

@@ -42,16 +42,8 @@ public class PlayerInAirState : PlayerState
         XInput = player.InputHandler.NormInputX;
         jumpInputStop = player.InputHandler.JumpInputStop;
         CheckJumpMultiplier();
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary])
-        {
-            stateMachine.ChangeState(player.PrimaryAttackState);
-        }
-        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary])
-        {
-            stateMachine.ChangeState(player.SecondaryAttackState);
-        }
 
-        else if (isGrounded && Movement.CurrentVelocity.y < 0.01f)
+        if (isGrounded && Movement.CurrentVelocity.y < 0.01f)
         {
             stateMachine.ChangeState(player.LandState);
         } else
