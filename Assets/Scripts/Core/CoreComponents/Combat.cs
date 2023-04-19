@@ -28,10 +28,12 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
         CheckKnockback();
     }
 
-    public void Damage(float amount)
+    public void Damage(float amount, float recharge)
     {
-        Debug.Log(core.transform.parent.name + " damaged");
+        //Debug.Log(core.transform.parent.name + " damaged");
         Stats?.DecreaseHealth(amount);
+        Stats?.IncreaseAwakening(recharge);
+        Debug.Log(Stats.currentAwakening);
         ParticleManager?.StartParticlesWithRandomRotation(damageParticles);
     }
 

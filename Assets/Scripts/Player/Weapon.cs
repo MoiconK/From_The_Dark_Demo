@@ -13,7 +13,14 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private SO_WeaponData weaponData;
 
-    protected Animator lightCombatAnimator;
+    protected GameObject weapon;
+
+    protected GameObject lightAttack;
+    protected Animator lightCombat;
+
+    protected GameObject heavyAttack;
+    protected Animator heavyCombat;
+
     protected PlayerAttackState state;
     protected Core core;
 
@@ -21,7 +28,11 @@ public class Weapon : MonoBehaviour
 
     protected virtual void Awake()
     {
-        lightCombatAnimator = GetComponent<Animator>();
+        weapon = GameObject.Find("Weapon");
+        lightAttack = weapon.transform.GetChild(0).gameObject;
+        heavyAttack = weapon.transform.GetChild(1).gameObject;
+        lightCombat = lightAttack.GetComponent<Animator>();
+        heavyCombat = heavyAttack.GetComponent<Animator>();
         gameObject.SetActive(false);
     }
     private void CheckMeleeAttack()
@@ -30,8 +41,8 @@ public class Weapon : MonoBehaviour
 
         foreach (IDamageable item in detectedDamageables.ToList())
         {
-           item.Damage(details.damageAmount);
-
+           item.Damage(details.damageAmount, details.awakeningRecharge);
+           
         }
 
         foreach (IKnockbackable item in detectedKnockbackables.ToList())
@@ -50,13 +61,16 @@ public class Weapon : MonoBehaviour
         }
 
 
-        lightCombatAnimator.SetBool("attack", true);
-        lightCombatAnimator.SetInteger("attackCounter", attackCounter);
+        lightCombat.SetBool("attack", true);
+        heavyCombat.SetBool("attack", true);
+        lightCombat.SetInteger("attackCounter", attackCounter);
+        heavyCombat.SetInteger("attackCounter", attackCounter);
     }
 
     public virtual void ExitWeapon()
     {
-        lightCombatAnimator.SetBool("attack", false);
+        lightCombat.SetBool("attack", false);
+        heavyCombat.SetBool("attack", false);
 
         attackCounter++;
 

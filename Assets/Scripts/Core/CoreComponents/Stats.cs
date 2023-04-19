@@ -7,9 +7,12 @@ public class Stats : CoreComponent
 {
     public event Action OnHealthZero;
     public event Action OnHealthChange;
+    public event Action OnAwakeningChange;
     
 
     [SerializeField] public float maxHealth;
+    public float maxAwakening;
+    public float currentAwakening;
     public float currentHealth;
 
     protected override void Awake()
@@ -17,6 +20,8 @@ public class Stats : CoreComponent
         base.Awake();
 
         currentHealth = maxHealth;
+        currentAwakening = 0;
+        
     }
 
     public void DecreaseHealth(float amount)
@@ -29,6 +34,18 @@ public class Stats : CoreComponent
             OnHealthZero?.Invoke();
             Debug.Log("Health is zero");
         }
+    }
+
+    public void IncreaseAwakening(float recharge)
+    {       
+        currentAwakening = Mathf.Clamp(currentAwakening + recharge, 0, maxAwakening);
+        OnAwakeningChange?.Invoke();
+    }
+
+    public void DecreaseAwakening()
+    {
+        currentAwakening = 0;
+        OnAwakeningChange.Invoke();
     }
 
     public void IncreaseHealth(float amount)
