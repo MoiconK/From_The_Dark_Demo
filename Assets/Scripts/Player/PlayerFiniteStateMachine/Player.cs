@@ -26,7 +26,9 @@ public class Player : MonoBehaviour
     public BoxCollider2D Collider { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
-    public PlayerInventory Inventory { get; private set; }
+    public PlayerInventory Inventory { get; private set; }   
+    public AudioSource jumpSound;
+    public AudioSource landSound;
 
     [SerializeField]
     private PlayerData playerData;

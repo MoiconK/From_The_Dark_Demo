@@ -32,6 +32,8 @@ public class Weapon : MonoBehaviour
 
     protected int attackCounter;
 
+    public AudioSource slashSound;
+
     protected virtual void Awake()
     {
         weapon = GameObject.Find("Weapon");
@@ -63,8 +65,8 @@ public class Weapon : MonoBehaviour
 
     public virtual void EnterWeapon()
     {
-        
-
+     
+        slashSound.Play();
         
         gameObject.SetActive(true);
 

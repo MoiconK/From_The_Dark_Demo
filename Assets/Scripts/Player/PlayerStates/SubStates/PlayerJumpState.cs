@@ -12,6 +12,7 @@ public class PlayerJumpState : PlayerAbilityState
     {
         base.Enter();
         Movement?.SetVelocityY(playerData.jumpVelocity);
+        player.jumpSound.Play();
         player.InAirState.IsJumping();
         isAbilityDone= true;
     }

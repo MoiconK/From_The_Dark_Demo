@@ -45,6 +45,7 @@ public class PlayerInAirState : PlayerState
 
         if (isGrounded && Movement.CurrentVelocity.y < 0.01f)
         {
+            player.landSound.Play();
             stateMachine.ChangeState(player.LandState);
         } else
         {
