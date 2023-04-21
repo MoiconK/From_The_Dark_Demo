@@ -4,8 +4,12 @@ using UnityEngine;
 
 public interface IDamageable
 {
-    void Damage(float amount, float recharge)
+    void Damage(float amount)
     {
 
+    }
+     void AwakeningCharge(float recharge)
+    {
+        
     }
 }

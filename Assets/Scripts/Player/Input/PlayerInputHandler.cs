@@ -31,8 +31,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Update()
     {
-        CheckJumpInputHoldTime();
-        
+        CheckJumpInputHoldTime();        
     }
 
     public void OnPrimaryAttackInput(InputAction.CallbackContext context)
@@ -56,6 +55,18 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.canceled)
         {
             AttackInputs[(int)CombatInputs.secondary] = false;
+        }
+    }
+
+    public void OnSpecialAttackInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            AttackInputs[(int)CombatInputs.special] = true;
+        }
+        if (context.canceled)
+        {
+            AttackInputs[(int)CombatInputs.special] = false;
         }
     }
 
@@ -113,5 +124,6 @@ public class PlayerInputHandler : MonoBehaviour
 public enum CombatInputs
 {
     primary,
-    secondary
+    secondary,
+    special
 }

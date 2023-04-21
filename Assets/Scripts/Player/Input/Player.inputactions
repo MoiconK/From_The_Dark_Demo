@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Awakening",
+                    "type": "Button",
+                    "id": "5f2a57fa-f947-4fcf-9a3c-47db6a5425e5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -302,6 +311,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Dodge",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "98c7344f-6486-42c4-80aa-056e4d086b46",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Awakening",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d6638353-3b13-431e-b27d-1a6189d234d8",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Awakening",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

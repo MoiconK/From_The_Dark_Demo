@@ -6,6 +6,8 @@ public class PlayerGroundedState : PlayerState
 {
     protected int XInput;
 
+    protected Stats Stats { get => stats ??= core.GetCoreComponent<Stats>(); }
+    protected Stats stats;
     protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
     protected Movement movement;
     private CollisionSenses CollisionSenses { get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>(); }
@@ -53,6 +55,11 @@ public class PlayerGroundedState : PlayerState
         } else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && isGrounded)
         {
             stateMachine.ChangeState(player.SecondaryAttackState);  
+        }
+        else if (player.InputHandler.AttackInputs[(int)CombatInputs.special] && isGrounded && Stats.currentAwakening == 100)
+        {
+            stateMachine.ChangeState(player.AwakeningAttackState);
+            Stats.DecreaseAwakening();
         }
         else if (dodgeInput)
         {

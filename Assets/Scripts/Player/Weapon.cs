@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using static UnityEditor.Progress;
 
 public class Weapon : MonoBehaviour
 {
+    protected Combat Combat { get => combat ??= core.GetCoreComponent<Combat>(); }
+    protected Combat combat;
     protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
     protected Movement movement;
 
@@ -14,6 +17,9 @@ public class Weapon : MonoBehaviour
     [SerializeField] private SO_WeaponData weaponData;
 
     protected GameObject weapon;
+
+    protected GameObject awakeningAttack;
+    protected Animator awakeningCombat;
 
     protected GameObject lightAttack;
     protected Animator lightCombat;
@@ -31,18 +37,22 @@ public class Weapon : MonoBehaviour
         weapon = GameObject.Find("Weapon");
         lightAttack = weapon.transform.GetChild(0).gameObject;
         heavyAttack = weapon.transform.GetChild(1).gameObject;
+        awakeningAttack = weapon.transform.GetChild(2).gameObject;
         lightCombat = lightAttack.GetComponent<Animator>();
         heavyCombat = heavyAttack.GetComponent<Animator>();
+        awakeningCombat = awakeningAttack.GetComponent<Animator>();
         gameObject.SetActive(false);
     }
     private void CheckMeleeAttack()
     {
-        WeaponAttackDetails details= weaponData.AttackDetails[attackCounter];
+       
+        WeaponAttackDetails details= weaponData.AttackDetails[attackCounter];       
 
         foreach (IDamageable item in detectedDamageables.ToList())
         {
-           item.Damage(details.damageAmount, details.awakeningRecharge);
-           
+           item.Damage(details.damageAmount);
+           Combat.AwakeningCharge(details.awakeningRecharge);
+
         }
 
         foreach (IKnockbackable item in detectedKnockbackables.ToList())
@@ -53,6 +63,9 @@ public class Weapon : MonoBehaviour
 
     public virtual void EnterWeapon()
     {
+        
+
+        
         gameObject.SetActive(true);
 
         if(attackCounter >= weaponData.amountOfAttacks)
@@ -63,14 +76,18 @@ public class Weapon : MonoBehaviour
 
         lightCombat.SetBool("attack", true);
         heavyCombat.SetBool("attack", true);
+        awakeningCombat.SetBool("attack", true);
+        
         lightCombat.SetInteger("attackCounter", attackCounter);
         heavyCombat.SetInteger("attackCounter", attackCounter);
+        awakeningCombat.SetInteger("attackCounter", attackCounter);
     }
 
     public virtual void ExitWeapon()
     {
         lightCombat.SetBool("attack", false);
         heavyCombat.SetBool("attack", false);
+        awakeningCombat.SetBool("attack", false);
 
         attackCounter++;
 

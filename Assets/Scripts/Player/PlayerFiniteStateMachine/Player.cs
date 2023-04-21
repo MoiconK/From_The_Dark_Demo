@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public PlayerLandState LandState { get; private set; }
     public PlayerAttackState PrimaryAttackState { get; private set; }
     public PlayerAttackState SecondaryAttackState { get; private set; }
+    public PlayerAttackState AwakeningAttackState { get; private set; }
     public PlayerDodgeState DodgeState { get; private set; }
 
     #endregion
@@ -43,6 +44,7 @@ public class Player : MonoBehaviour
         LandState = new PlayerLandState(this, StateMachine, playerData, "land");
         PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
         SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
+        AwakeningAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
         DodgeState = new PlayerDodgeState(this, StateMachine, playerData, "dodge");
 
     }
@@ -57,6 +59,7 @@ public class Player : MonoBehaviour
 
         PrimaryAttackState.SetWeapon(Inventory.weapons[(int)CombatInputs.primary]);
         SecondaryAttackState.SetWeapon(Inventory.weapons[(int)CombatInputs.secondary]);
+        AwakeningAttackState.SetWeapon(Inventory.weapons[(int)CombatInputs.special]);
 
         StateMachine.Initialize(IdleState);
         

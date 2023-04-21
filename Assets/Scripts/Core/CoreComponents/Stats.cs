@@ -12,7 +12,7 @@ public class Stats : CoreComponent
 
     [SerializeField] public float maxHealth;
     public float maxAwakening;
-    public float currentAwakening;
+    public float currentAwakening = 0;
     public float currentHealth;
 
     protected override void Awake()
@@ -20,7 +20,6 @@ public class Stats : CoreComponent
         base.Awake();
 
         currentHealth = maxHealth;
-        currentAwakening = 0;
         
     }
 
@@ -37,7 +36,7 @@ public class Stats : CoreComponent
     }
 
     public void IncreaseAwakening(float recharge)
-    {       
+    {
         currentAwakening = Mathf.Clamp(currentAwakening + recharge, 0, maxAwakening);
         OnAwakeningChange?.Invoke();
     }
