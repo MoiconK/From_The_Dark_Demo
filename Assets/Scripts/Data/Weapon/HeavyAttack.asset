@@ -15,7 +15,7 @@ MonoBehaviour:
   attackDetails:
   - attackName: HeavyAttack_1
     movementSpeed: 2
-    damageAmount: 15
-    awakeningRecharge: 0
+    damageAmount: 35
+    awakeningRecharge: 20
     knockbackStrength: 5
     knockbackAngle: {x: 1, y: 1}
