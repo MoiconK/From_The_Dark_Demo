@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerInAirState : PlayerState
 {
+    protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
+    protected Movement movement;
+    private CollisionSenses CollisionSenses { get => collisionSenses ??= core.GetCoreComponent<CollisionSenses>(); }
+    private CollisionSenses collisionSenses;
+
     private bool isGrounded;
     private int XInput;
     private bool jumpInputStop;
@@ -17,7 +22,7 @@ public class PlayerInAirState : PlayerState
     public override void DoChecks()
     {
         base.DoChecks();
-        isGrounded= player.CheckIfGrounded();
+        isGrounded= CollisionSenses.Grounded;
     }
 
     public override void Enter()
@@ -37,15 +42,17 @@ public class PlayerInAirState : PlayerState
         XInput = player.InputHandler.NormInputX;
         jumpInputStop = player.InputHandler.JumpInputStop;
         CheckJumpMultiplier();
-        if (isGrounded && player.CurrentVelocity.y < 0.01f)
+
+        if (isGrounded && Movement.CurrentVelocity.y < 0.01f)
         {
+            player.landSound.Play();
             stateMachine.ChangeState(player.LandState);
         } else
         {
-            player.CheckIfShouldFlip(XInput);
-            player.SetVelocityX(playerData.movementVelocity * XInput);
-            player.Anim.SetFloat("yVelocity", player.CurrentVelocity.y);
-            player.Anim.SetFloat("xVelocity", Mathf.Abs(player.CurrentVelocity.x));
+            Movement?.CheckIfShouldFlip(XInput);
+            Movement?.SetVelocityX(playerData.movementVelocity * XInput);
+            player.Anim.SetFloat("yVelocity", Movement.CurrentVelocity.y);
+            player.Anim.SetFloat("xVelocity", Mathf.Abs(Movement.CurrentVelocity.x));
         }
     }
 
@@ -73,10 +80,10 @@ public class PlayerInAirState : PlayerState
         {
             if (jumpInputStop)
             {
-                player.SetVelocityY(player.CurrentVelocity.y * playerData.JumpHeightMultiplier);
+                Movement?.SetVelocityY(Movement.CurrentVelocity.y * playerData.JumpHeightMultiplier);
                 isJumping = false;
             }
-            else if (player.CurrentVelocity.y <= 0)
+            else if (Movement.CurrentVelocity.y <= 0)
             {
                 isJumping = false;
             }

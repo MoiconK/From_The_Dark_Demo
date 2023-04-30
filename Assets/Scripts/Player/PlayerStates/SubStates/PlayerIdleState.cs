@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerIdleState : PlayerGroundedState
 {
+    
     public PlayerIdleState(Player player, PlayerStateMachine stateMachine, PlayerData playerData, string animBoolName) : base(player, stateMachine, playerData, animBoolName)
     {
     }
@@ -15,7 +16,7 @@ public class PlayerIdleState : PlayerGroundedState
 
     public override void Enter()
     {
-        player.SetVelocityX(0);
+        Movement?.SetVelocityX(0);
         base.Enter();
     }
 
@@ -27,6 +28,7 @@ public class PlayerIdleState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        Movement?.SetVelocityX(0);
         if(XInput != 0)
         {
             stateMachine.ChangeState(player.MoveState);
