@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph.Drawing.Inspector.PropertyDrawers;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerState 
 {
+
+    
+
     protected Core core;
 
     protected Player player;
@@ -51,4 +54,5 @@ public class PlayerState
     }
 
     public virtual void AnimationFinishTrigger() => isAnimationFinished = true;
+
 }

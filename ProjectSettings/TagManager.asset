@@ -44,6 +44,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Fondo
+    uniqueID: 2283751345
+    locked: 0
+  - name: Tiles
+    uniqueID: 2345763905
+    locked: 0
   - name: Player
     uniqueID: 3444606395
     locked: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Combat : CoreComponent, IDamageable, IKnockbackable
 {
     [SerializeField] private GameObject damageParticles;
+    [SerializeField] private bool isCoffer;
 
     protected Movement Movement { get => movement ??= core.GetCoreComponent<Movement>(); }
     protected Movement movement;
@@ -37,17 +38,21 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
 
     public void AwakeningCharge(float recharge)
     {
+        if (!isCoffer) { 
         Stats?.IncreaseAwakening(recharge);
         Debug.Log(recharge);
         Debug.Log(Stats.currentAwakening);
+        }
     }
 
    public void Knockback(Vector2 angle, float strength, int direction)
     {
+        if (!isCoffer) { 
         Movement?.SetVelocityKb(strength, angle, direction);
         Movement.CanSetVelocity = false;
         isKnockbackActive = true;
         knockbackStartTime = Time.time;
+        }
     }
 
     private void CheckKnockback()
