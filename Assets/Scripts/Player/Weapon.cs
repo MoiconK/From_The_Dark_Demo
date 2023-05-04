@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System.Linq;
-using static UnityEditor.Progress;
 
 public class Weapon : MonoBehaviour
 {
