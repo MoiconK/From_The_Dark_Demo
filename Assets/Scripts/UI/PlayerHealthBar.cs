@@ -31,7 +31,6 @@ public class PlayerHealthBar : MonoBehaviour
     {
         currentHealth = playerStats.currentHealth;
         healthBarFill.fillAmount = currentHealth / playerStats.maxHealth;
-        Debug.Log(currentHealth);
     }
 
     public void OnEnable()

@@ -40,8 +40,6 @@ public class Combat : CoreComponent, IDamageable, IKnockbackable
     {
         if (!isCoffer) { 
         Stats?.IncreaseAwakening(recharge);
-        Debug.Log(recharge);
-        Debug.Log(Stats.currentAwakening);
         }
     }
 

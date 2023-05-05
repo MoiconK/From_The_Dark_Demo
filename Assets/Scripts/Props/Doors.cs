@@ -15,6 +15,8 @@ public class Doors : MonoBehaviour
     void Update()
     {         
         destroyDoor();
+        enemigos = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        Debug.Log(enemigos);
     }
 
     private void destroyDoor()

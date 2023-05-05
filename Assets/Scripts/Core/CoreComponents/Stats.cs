@@ -9,6 +9,7 @@ public class Stats : CoreComponent
     public event Action OnHealthChange;
     public event Action OnAwakeningChange;
     
+    
 
     [SerializeField] public float maxHealth;
     public float maxAwakening;
@@ -29,9 +30,10 @@ public class Stats : CoreComponent
         OnHealthChange?.Invoke();
         if(currentHealth <= 0)
         {
+            
             currentHealth = 0;
             OnHealthZero?.Invoke();
-            Debug.Log("Health is zero");
+            
         }
     }
 

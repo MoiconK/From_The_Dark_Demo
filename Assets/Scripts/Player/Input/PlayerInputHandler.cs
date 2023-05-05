@@ -36,51 +36,64 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnPrimaryAttackInput(InputAction.CallbackContext context)
     {
-        if(context.started)
+       if (PauseMenu.isPaused == false)
         {
-            AttackInputs[(int)CombatInputs.primary] = true;
-        }
-        if(context.canceled)
-        {
-            AttackInputs[(int)CombatInputs.primary] = false;
+            if (context.started)
+            {
+                AttackInputs[(int)CombatInputs.primary] = true;
+            }
+            if (context.canceled)
+            {
+                AttackInputs[(int)CombatInputs.primary] = false;
+            }
         }
     }
 
     public void OnSecondaryAttackInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (PauseMenu.isPaused == false)
         {
-            AttackInputs[(int)CombatInputs.secondary] = true;
-        }
-        if (context.canceled)
-        {
-            AttackInputs[(int)CombatInputs.secondary] = false;
+            if (context.started)
+            {
+                AttackInputs[(int)CombatInputs.secondary] = true;
+            }
+            if (context.canceled)
+            {
+                AttackInputs[(int)CombatInputs.secondary] = false;
+            }
         }
     }
 
     public void OnSpecialAttackInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (PauseMenu.isPaused == false)
         {
-            AttackInputs[(int)CombatInputs.special] = true;
-        }
-        if (context.canceled)
-        {
-            AttackInputs[(int)CombatInputs.special] = false;
+            if (context.started)
+            {
+                AttackInputs[(int)CombatInputs.special] = true;
+            }
+            if (context.canceled)
+            {
+                AttackInputs[(int)CombatInputs.special] = false;
+            }
         }
     }
 
     public void OnMoveInput(InputAction.CallbackContext context) 
     {  
+        if (PauseMenu.isPaused == false) { 
         RawMovementInput = context.ReadValue<Vector2>();
 
         NormInputX = Mathf.RoundToInt(RawMovementInput.x);
         NormInputY = Mathf.RoundToInt(RawMovementInput.y);
+        }
     }
 
     public void OnJumpInput(InputAction.CallbackContext context) 
     {
-        if (context.started)
+        if (PauseMenu.isPaused == false)
+        {
+            if (context.started)
         {
             JumpInput = true;
             jumpImputStartTime= Time.time;
@@ -91,6 +104,7 @@ public class PlayerInputHandler : MonoBehaviour
         {
             JumpInputStop= true;
             
+        }
         }
     }
    
@@ -106,12 +120,13 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnDodgeInput(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (PauseMenu.isPaused == false) { 
+            if (context.started)
         {
             DodgeInput = true;
         }
 
-
+        }
     }
 
     public void UseDodgeInput() => DodgeInput= false;
