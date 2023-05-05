@@ -41,7 +41,7 @@ public class Death : CoreComponent
         if (isPlayer)
         {
             deathMenu.SetActive(true);
-            Time.timeScale = 0f;
+            
         }
 
         if (isBoss)
