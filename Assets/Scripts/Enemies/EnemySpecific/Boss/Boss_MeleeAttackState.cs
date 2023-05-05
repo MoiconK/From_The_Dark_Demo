@@ -18,6 +18,7 @@ public class Boss_MeleeAttackState : MeleeAttackState
     public override void Enter()
     {
         base.Enter();
+        boss.attackSound.Play();
     }
 
     public override void Exit()

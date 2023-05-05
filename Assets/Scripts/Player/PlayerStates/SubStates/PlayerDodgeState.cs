@@ -34,6 +34,7 @@ public class PlayerDodgeState : PlayerAbilityState
     public override void Enter()
     {
         base.Enter();
+        player.jumpSound.Play();
         //combat.SetActive(false);     
     }
 

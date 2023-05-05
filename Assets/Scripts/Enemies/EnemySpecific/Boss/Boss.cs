@@ -23,6 +23,8 @@ public class Boss : Entity
     [SerializeField] D_MeleeAttackState meleeAttackStateData;
     [SerializeField] D_StunState stunStateData;
     [SerializeField] D_DeadState deadStateData;
+
+    public AudioSource attackSound;
     public override void Awake()
     {
         base.Awake();

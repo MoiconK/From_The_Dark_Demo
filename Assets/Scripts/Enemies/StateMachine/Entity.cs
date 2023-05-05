@@ -32,6 +32,8 @@ public class Entity : MonoBehaviour
     protected bool isStunned;
     protected bool isDead;
 
+    
+
     public virtual void Awake()
     {
         Core = GetComponentInChildren<Core>();

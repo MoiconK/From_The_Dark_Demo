@@ -30,7 +30,7 @@ public class AwakeningBar : MonoBehaviour
     {
         currentAwakening = playerStats.currentAwakening;
         awakeningBarFill.fillAmount = currentAwakening / playerStats.maxAwakening;
-        Debug.Log(currentAwakening);
+        
     }
 
     public void OnEnable()

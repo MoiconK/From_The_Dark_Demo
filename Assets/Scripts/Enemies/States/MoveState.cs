@@ -24,7 +24,6 @@ public class MoveState : State
         base.DoChecks();
 
         isDetectingLedge = CollisionSenses.CheckLedge;
-        Debug.Log(CollisionSenses);
         isDetectingWall = CollisionSenses.CheckWall;
     }
 
